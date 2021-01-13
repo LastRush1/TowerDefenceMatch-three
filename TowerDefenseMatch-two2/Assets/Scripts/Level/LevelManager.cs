@@ -67,6 +67,11 @@ public class LevelManager : MonoBehaviour
         //BuyAndBuildTower(GridNumber);
     }
 
+    public void buttonClick()
+    {
+        towerManager.addTower();
+    }
+
 
 
     /// <summary>

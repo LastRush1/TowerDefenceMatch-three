@@ -3,22 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Tower : MonoBehaviour
+public class Tower : TowerContent
 {
-
-    int level = 1;
-    public int GetTowerLevel
-    {
-        get { return level; }
-    }
-
-    [SerializeField]
-    int id = 0;
-
-    public int GetTowerId
-    {
-        get { return id; }
-    }
 
     //int towerNum;
 

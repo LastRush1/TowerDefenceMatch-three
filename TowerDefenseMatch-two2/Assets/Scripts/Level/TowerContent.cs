@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class TowerContent : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    protected int level = 1;
+    public int GetTowerLevel
     {
-        
+        get { return level; }
     }
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField]
+    protected int id = 0;
+
+    public int GetTowerId
     {
-        
+        get { return id; }
     }
 }
