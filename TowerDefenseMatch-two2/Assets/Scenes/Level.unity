@@ -369,7 +369,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -440}
+  m_AnchoredPosition: {x: 0, y: -290}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &525954406
@@ -994,7 +994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board: {fileID: 1799853763}
-  sizeBoard: {x: 4, y: 4}
+  sizeBoard: {x: 6, y: 6}
   gridTileMap: {fileID: 0}
   canvasTileMap: {fileID: 0}
   gridPlacePrefab: {fileID: 6046587350090188717, guid: 2448ea8e460d4e648b66157856de0d87, type: 3}

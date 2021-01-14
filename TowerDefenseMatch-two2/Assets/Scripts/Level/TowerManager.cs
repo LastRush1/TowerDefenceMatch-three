@@ -9,14 +9,8 @@ public class TowerManager : MonoBehaviour
 
     List<Tower> towers = new List<Tower>();
 
-    List<int> towersPlaceNum = new List<int>();
-
     [SerializeField]
-    List<Tower> prefabs = new List<Tower>();
-
-    int prefabNum = 0;
-
-    
+    List<Tower> prefabs = new List<Tower>();   
 
     List<GridPlace> gridPlace;
 
@@ -35,35 +29,30 @@ public class TowerManager : MonoBehaviour
         
     }
 
-
+    /// <summary>
+    /// Передает знане о GridPlace листе 
+    /// </summary>
+    /// <param name="gridPlace"></param>
     public void SetTowers(List<GridPlace> gridPlace)
     {
         this.gridPlace = gridPlace;
         int gridSum = gridPlace.Count;
-
-        /*
-         //                 *******************Заполняет все поле башнями (для тестов)*********************
-        while (gridSum > 0)
-        {
-            gridSum--;
-            towers.Add(Instantiate(prefabs[prefabNum],gameObject.transform.position,Quaternion.identity));
-            //Исправить при реворке демки!!!
-            towers[towers.Count - 1].transform.position = gridPlace[towers.Count - 1].transform.position;
-            towersPlaceNum.Add(gridPlace[towers.Count - 1].NumberGrid);
-            banPlace[gridPlace[towers.Count - 1].NumberGrid] = true;
-            prefabNum++;
-            if (prefabNum == prefabs.Count)
-            {
-                prefabNum = 0;
-            }
-        } */
     }
 
+    /// <summary>
+    /// Удобный рандомайзер
+    /// </summary>
+    /// <param name="min"></param>
+    /// <param name="max"></param>
+    /// <returns></returns>
     float Randomazer(float min, float max)
     {
         return Random.Range(min, max);
     }
 
+    /// <summary>
+    /// Проверка свободных слотов под башню и ее добавление
+    /// </summary>
     public void addTower()
     {
         List<int> clearPlace = new List<int>();
@@ -87,7 +76,7 @@ public class TowerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Слияние двух башен
+    /// Проверка возможности слияния двух башен
     /// </summary>
     public void PotentialUnion(int firstTowerNum, int secondTowerNum)
     {
@@ -100,7 +89,7 @@ public class TowerManager : MonoBehaviour
                 {
                     if (tower1.GetTowerLevel == tower2.GetTowerLevel)
                     {
-                        Union(tower1, tower2, firstTowerNum, secondTowerNum);
+                        Union(tower2.GetTowerLevel, firstTowerNum, secondTowerNum);
                     }
                 }
             }
@@ -112,17 +101,24 @@ public class TowerManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Создать новую башню
+    /// </summary>
+    /// <param name="num"></param>
     void TowerInstantiate(int num)
     {
         if (gridPlace[num].building == null)
         {
-            //Debug.Log("ПРивет");
             gridPlace[num].building = Instantiate(prefabs[(int)Randomazer(0, prefabs.Count - 1)], gameObject.transform.position, Quaternion.identity);
             towers.Add(gridPlace[num].building);
             gridPlace[num].building.transform.position = gridPlace[num].transform.position;
         }
     }
 
+    /// <summary>
+    /// Удалить башню(переписать и сдеать более экономично, т.е. отключать и снова использовать)
+    /// </summary>
+    /// <param name="tower"></param>
     void TowerDestroy(GridPlace tower)
     {
         Destroy(tower.building.gameObject);
@@ -137,27 +133,32 @@ public class TowerManager : MonoBehaviour
         }
     }
 
-    private void Union(Tower tower1, Tower tower2, int firstTowerNum, int secondTowerNum) // При слиянии нужно удалять из активных башен!!! а так же добавлять в активные башни новые
+    /// <summary>
+    /// Слияние башен
+    /// </summary>
+    /// <param name="tower1"></param>
+    /// <param name="tower2"></param>
+    /// <param name="firstTowerNum"></param>
+    /// <param name="secondTowerNum"></param>
+    private void Union(int levelTower2, int firstTowerNum, int secondTowerNum) // При слиянии нужно удалять из активных башен!!! а так же добавлять в активные башни новые
     {
-        int level;
-        Transform transformTower;
-
-        level = tower2.GetTowerLevel;
-        transformTower = tower2.transform;
         TowerDestroy(gridPlace[firstTowerNum]);
         TowerDestroy(gridPlace[secondTowerNum]);
         TowerInstantiate(gridPlace[secondTowerNum].NumberGrid);
 
-        ///обдумать шаг
 
-
-        for (int i = 0; i < level; i++)
+        for (int i = 0; i < levelTower2; i++)
         {
             towers[towers.Count-1].LevelUp();
         }
         Debug.Log("Типо слияние");
     }
 
+    /// <summary>
+    /// Попытка выделить башню
+    /// </summary>
+    /// <param name="gridNum"></param>
+    /// <returns></returns>
     public Tower TryTakeTower(int gridNum)
     {
         for (int i = 0; i < towers.Count; i++)
