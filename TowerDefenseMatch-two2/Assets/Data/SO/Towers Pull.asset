@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c19f037793f0779439a1ac5226d05762, type: 3}
+  m_Name: Towers Pull
+  m_EditorClassIdentifier: 
+  towers:
+  - {fileID: 11400000, guid: 7ef4225d5e428ae4881d99e4e6ca0ce5, type: 2}
+  - {fileID: 11400000, guid: 89dcc228b9a78e94683a1e60ae3f7e26, type: 2}
+  - {fileID: 11400000, guid: 0df4a946932ec7a4f811f517a3dcb8ca, type: 2}
+  - {fileID: 11400000, guid: 7248a216d575a184dbc26c361776c6a9, type: 2}
+  - {fileID: 11400000, guid: 91cb75c19635ed3478806d61c11f5056, type: 2}
+  - {fileID: 11400000, guid: bf136e00909cca840b4f6fbab529837b, type: 2}

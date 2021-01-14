@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0e5e902a867b249a235302d74fc6e1, type: 3}
   m_Name: Cube 1 Main
   m_EditorClassIdentifier: 
-  id: 0
-  name: 
+  id: 1
+  name: Cube 1
   icon: {fileID: 0}
-  towers: []
+  towers:
+  - {fileID: 11400000, guid: f04d0bb2203f05a4e82554d62b90e383, type: 2}
+  - {fileID: 11400000, guid: eecad9f7761827c4281cf3b1acb16907, type: 2}

@@ -10,6 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14cb3679cce5e1141b89c418f334fdd0, type: 3}
-  m_Name: New Cube Main
+  m_Name: Cube Main
   m_EditorClassIdentifier: 
-  towers: []
+  id: 0
+  name: Cube
+  icon: {fileID: 0}
+  towers:
+  - {fileID: 11400000, guid: b0564d2e368e5da4eb4e8010885ec1b1, type: 2}
+  - {fileID: 11400000, guid: 60a1ee264c7f2cb42acbcc08649e345e, type: 2}

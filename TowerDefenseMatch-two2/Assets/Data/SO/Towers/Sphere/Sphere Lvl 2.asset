@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d19b73e14f0ad499097601777464fa, type: 3}
   m_Name: Sphere Lvl 2
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  attack: 0
-  level: 0
+  prefab: {fileID: 8726316373287931163, guid: f0e9f4e1e9295ba4f909dd4b3e66f652, type: 3}
+  attack: 2
+  level: 2

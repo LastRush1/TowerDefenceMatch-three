@@ -10,4 +10,10 @@ public class AllTowers : ScriptableObject
 {
     [SerializeField]
     List<TowerAbstractSO> towers = new List<TowerAbstractSO>();
+
+    public List<TowerAbstractSO> Towers
+    { 
+        get { return towers; }
+    }
+
 }

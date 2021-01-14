@@ -5,11 +5,16 @@ using UnityEngine.UI;
 
 public class Tower : TowerContent
 {
-
+    TowerFactory originFactory;
     //int towerNum;
 
     [SerializeField]
-    Text levelNumText;
+    Text levelNumText = default;
+
+    public void Initialize()
+    {
+
+    }
 
     void Start()
     {
@@ -36,4 +41,17 @@ public class Tower : TowerContent
         level++;
         changeLevelText(level);
     }
+
+
+    public TowerFactory OriginFactory
+    {
+        get => originFactory;
+        set
+        {
+            Debug.Assert(originFactory == null, "Redefined origin factory!");
+            originFactory = value;
+        }
+    }
+
+
 }

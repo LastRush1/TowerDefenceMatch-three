@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972954bbf23313444a2fa98af2e1ea1b, type: 3}
   m_Name: Cube 1 Lvl 2
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  attack: 0
-  level: 0
+  prefab: {fileID: 3711024914551487275, guid: 737f27090639ab146b20596eabd304d5, type: 3}
+  attack: 2
+  level: 2

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0ba304693d44324ab61835a78a69550, type: 3}
-  m_Name: New Cube 2 Lvl 1
+  m_Name: Cube 2 Lvl 1
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  attack: 0
-  level: 0
+  prefab: {fileID: 2598035678829403465, guid: 567e27ef6a87b9949bcbe46ed5383596, type: 3}
+  attack: 1
+  level: 1

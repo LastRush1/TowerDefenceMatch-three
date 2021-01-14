@@ -10,5 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69a9cb232bdb936488e98dbee4bfc12d, type: 3}
-  m_Name: New All Towers
+  m_Name: All Towers
   m_EditorClassIdentifier: 
+  towers:
+  - {fileID: 11400000, guid: b0564d2e368e5da4eb4e8010885ec1b1, type: 2}
+  - {fileID: 11400000, guid: f04d0bb2203f05a4e82554d62b90e383, type: 2}
+  - {fileID: 11400000, guid: 1b8115dda3164a14f9e6b0a6f3e993cb, type: 2}
+  - {fileID: 11400000, guid: a2fc257f9c02615429187190bd37378f, type: 2}
+  - {fileID: 11400000, guid: 34daddd64233971418323e2df3ff2e1c, type: 2}
+  - {fileID: 11400000, guid: 393e760f9c28d17488650f029ba0cdc1, type: 2}

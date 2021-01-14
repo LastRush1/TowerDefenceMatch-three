@@ -6,7 +6,6 @@ using Random = UnityEngine.Random;
 
 public class TowerManager : MonoBehaviour
 {
-
     List<Tower> towers = new List<Tower>();
 
     [SerializeField]
@@ -14,13 +13,27 @@ public class TowerManager : MonoBehaviour
 
     List<GridPlace> gridPlace;
 
+    LoadTowers loadTowers;
+
+    [SerializeField]
+    TowerFactory towerFactory;
+
     private void Awake()
     {
-        
+        loadTowers = GetComponent<LoadTowers>();
+        prefabs = loadTowers.Towers;
     }
 
     void Start()
     {
+        List<Tower> tower = new List<Tower>();
+
+        /*
+        List<BasicInfoTower> towers = lvlTowerPull.Towers;
+        for (int i = 0; i < towers.Count; i++)
+        {
+            prefabs = towers[i]
+        }*/
 
     }
 
@@ -56,7 +69,6 @@ public class TowerManager : MonoBehaviour
     public void addTower()
     {
         List<int> clearPlace = new List<int>();
-        bool set = false;
         for (int i = 0; i < gridPlace.Count; i++)
         {
             if (gridPlace[i].building == null)
@@ -105,15 +117,29 @@ public class TowerManager : MonoBehaviour
     /// Создать новую башню
     /// </summary>
     /// <param name="num"></param>
-    void TowerInstantiate(int num)
+    void TowerInstantiate2(int num)
     {
         if (gridPlace[num].building == null)
         {
             gridPlace[num].building = Instantiate(prefabs[(int)Randomazer(0, prefabs.Count - 1)], gameObject.transform.position, Quaternion.identity);
             towers.Add(gridPlace[num].building);
             gridPlace[num].building.transform.position = gridPlace[num].transform.position;
-        }
+        } //
     }
+
+    void TowerInstantiate(int num)
+    {
+        if (gridPlace[num].building == null)
+        {
+            Tower tower = towerFactory.Get(prefabs[(int)Randomazer(0, prefabs.Count - 1)]);
+            tower.transform.position = gridPlace[num].gameObject.transform.position;
+            gridPlace[num].building = tower;
+            towers.Add(gridPlace[num].building);
+            //gridPlace[num].building.transform.position = gridPlace[num].transform.position;
+        } 
+    }
+
+
 
     /// <summary>
     /// Удалить башню(переписать и сдеать более экономично, т.е. отключать и снова использовать)

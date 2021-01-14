@@ -829,7 +829,7 @@ Transform:
   m_GameObject: {fileID: 1799853763}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.58}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 1265592397}
   m_RootOrder: 0
@@ -974,6 +974,8 @@ GameObject:
   - component: {fileID: 1918052700}
   - component: {fileID: 1918052698}
   - component: {fileID: 1918052701}
+  - component: {fileID: 1918052702}
+  - component: {fileID: 1918052703}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -997,6 +999,8 @@ MonoBehaviour:
   sizeBoard: {x: 6, y: 6}
   gridTileMap: {fileID: 0}
   canvasTileMap: {fileID: 0}
+  gridFactory: {fileID: 11400000, guid: ba249602d01d8e9469d5f0e0be2f892e, type: 2}
+  roadFactory: {fileID: 11400000, guid: b7209a42058b8b949af5773aef05eb5a, type: 2}
   gridPlacePrefab: {fileID: 6046587350090188717, guid: 2448ea8e460d4e648b66157856de0d87, type: 3}
 --- !u!4 &1918052699
 Transform:
@@ -1024,7 +1028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83432d55befae9d428b143bc37edbe21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tower: {fileID: 0}
+  enemyFactory: {fileID: 11400000, guid: 62fca1ee5b32f49469441ffd4af79b5b, type: 2}
 --- !u!114 &1918052701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1037,13 +1041,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06643db0af734414d8fc1a5f50d8b629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 3711024914551487275, guid: 737f27090639ab146b20596eabd304d5, type: 3}
-  - {fileID: 8726316373287931163, guid: f0e9f4e1e9295ba4f909dd4b3e66f652, type: 3}
-  - {fileID: 2598035678829403465, guid: 567e27ef6a87b9949bcbe46ed5383596, type: 3}
-  - {fileID: 7101984179075380889, guid: 9be63ec675fa4154e8ad233a87f684f0, type: 3}
-  - {fileID: 2122645230173431195, guid: 5b5ca2a6f8f079544bca816c8309dac9, type: 3}
-  - {fileID: 9197667254804181280, guid: a9e4d00a319f40c4aa7b06677cc43f65, type: 3}
+  prefabs: []
+  towerFactory: {fileID: 11400000, guid: 22e7f6fc40fb80a4ca5cd9480b198e24, type: 2}
+--- !u!114 &1918052702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918052697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dd125d6a2d47ff4c8ad4ee836fcefae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pull: {fileID: 11400000, guid: 53c8109a995a46b4e9b4f5974989ed6f, type: 2}
+  allTowers: {fileID: 11400000, guid: 808149a2396c5624b810d241ca92ddea, type: 2}
+--- !u!114 &1918052703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918052697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794832a3d662c854b88bd8a5c587bb57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyFactory: {fileID: 11400000, guid: 62fca1ee5b32f49469441ffd4af79b5b, type: 2}
+  spawnSpeed: 2
 --- !u!1 &2143257207
 GameObject:
   m_ObjectHideFlags: 0

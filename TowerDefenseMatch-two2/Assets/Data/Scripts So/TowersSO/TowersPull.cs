@@ -6,8 +6,13 @@ using UnityEngine;
 /// <summary>
 /// Пул башен для уровня
 /// </summary>
-public class LevelTowersPull : ScriptableObject
+public class TowersPull : ScriptableObject
 {
     [SerializeField]
-    List<TowerAbstractSO> towers = new List<TowerAbstractSO>();
+    List<BasicInfoTower> towers = new List<BasicInfoTower>();
+
+    public List<BasicInfoTower> Towers
+    { 
+        get { return towers; }
+    }
 }

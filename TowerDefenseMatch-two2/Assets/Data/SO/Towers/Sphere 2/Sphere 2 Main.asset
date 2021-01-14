@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f82dbc36e95a2ce43931b913401fe027, type: 3}
   m_Name: Sphere 2 Main
   m_EditorClassIdentifier: 
-  id: 0
-  name: 
+  id: 5
+  name: Sphere 2
   icon: {fileID: 0}
-  towers: []
+  towers:
+  - {fileID: 11400000, guid: 393e760f9c28d17488650f029ba0cdc1, type: 2}
+  - {fileID: 11400000, guid: 1897463474ec98a45a3f07fdb04fbb7c, type: 2}

@@ -6,4 +6,8 @@ public class SphereMain : BasicInfoTower
 {
     [SerializeField]
     List<Sphere> towers = new List<Sphere>();
+    public List<Sphere> Towers
+    {
+        get { return towers; }
+    }
 }

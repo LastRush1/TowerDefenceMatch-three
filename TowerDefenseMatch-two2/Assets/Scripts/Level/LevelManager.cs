@@ -7,24 +7,32 @@ public class LevelManager : MonoBehaviour
 {
     BoardCreater boardCreater;
     TowerManager towerManager;
+    EnemyController enemySpawner;
+
+    [SerializeField]
+    EnemyFactory enemyFactory;
+
     Ray TouchRay => Camera.main.ScreenPointToRay(Input.mousePosition);
 
     int GridNumber = 0;
 
     GridPlace gridPlace;
 
-    [SerializeField]
     Tower tower;
 
     private void Awake()
     {
         boardCreater = GetComponent<BoardCreater>();
         towerManager = GetComponent<TowerManager>();
+        enemySpawner = GetComponent<EnemyController>();
+        
     }
     void Start()
     {
         boardCreater.LoadMap(true);
         towerManager.SetTowers(boardCreater.GridPlaceList);
+        enemySpawner.StartSpawn(boardCreater.FirstRoad);
+        //enemyFactory.Get();
     }
 
 

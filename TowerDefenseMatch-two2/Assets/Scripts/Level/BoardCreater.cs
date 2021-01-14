@@ -4,24 +4,29 @@ using UnityEngine;
 public class BoardCreater : MonoBehaviour
 {
     [SerializeField]
-    GameObject board;
+    GameObject board = default;
 
     [SerializeField]
-    Vector2Int sizeBoard;
+    Vector2Int sizeBoard = default;
 
     [SerializeField]
-    GameObject gridTileMap;
+    GameObject gridTileMap = default;
 
     [SerializeField]
-    GameObject canvasTileMap;
+    GameObject canvasTileMap = default;
 
+    [SerializeField]
+    GridFactory gridFactory = default;
+
+    [SerializeField]
+    RoadFactory roadFactory = default;
     public Vector2Int SizeBoard
     {
         get { return sizeBoard; }
     }
 
     [SerializeField]
-    GridPlace gridPlacePrefab;
+    GridPlace gridPlacePrefab = default;
 
     List<GridPlace> gridPlaceList = new List<GridPlace>();
 
@@ -36,6 +41,20 @@ public class BoardCreater : MonoBehaviour
         get { return board; }
     }
 
+
+    List<Road> roads = new List<Road>();
+
+    public Transform FirstRoad
+    { 
+        get { return roads[0].transform; }
+    }
+
+
+
+
+    /// <summary>
+    /// Для TileMap
+    /// </summary>
     void TileMapSettings()
     {
         if (gridTileMap == null)
@@ -55,6 +74,9 @@ public class BoardCreater : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Создаем в нужном месте grid
+    /// </summary>
     void SliceBoard()
     {
         float x, y;
@@ -98,7 +120,7 @@ public class BoardCreater : MonoBehaviour
         }
     } 
 
-    GameObject loadTileMap;
+    GameObject loadTileMap = default;
     public void LoadMap(bool LoadBoard)
     {
         if (LoadBoard)
@@ -106,15 +128,13 @@ public class BoardCreater : MonoBehaviour
             board.transform.localScale = new Vector3(sizeBoard.x, sizeBoard.y, 1);
             Debug.Log($"Размер карты { sizeBoard.x} на { sizeBoard.y}");
             SliceBoard();
-
-
         }
         else
         {
             board.transform.localScale = new Vector3(sizeBoard.x, 1, sizeBoard.y);
             SliceBoard();
         }
-
+        LoadRoad();
     }
     /*
          public void LoadMap(bool LoadBoard, Vector2Int size, GameObject tileMap)
@@ -142,7 +162,10 @@ public class BoardCreater : MonoBehaviour
 
     void createGrid(float x, float y, int num)
     {
-        gridPlaceList.Add(Instantiate(gridPlacePrefab, new Vector3(x, y, 0), Quaternion.identity));
+        //gridPlaceList.Add(Instantiate(gridPlacePrefab, new Vector3(x, y, 0), Quaternion.identity));
+        GridPlace grid = gridFactory.Get();
+        grid.transform.position = new Vector3(x, y, 0);
+        gridPlaceList.Add(grid);
         gridPlaceList[num].NumberGrid = num;
     } 
 
@@ -159,4 +182,49 @@ public class BoardCreater : MonoBehaviour
         }
         return null;
     }
+
+
+
+    void LoadRoad()
+    {
+        int sum = 0;
+        Road road;
+        Debug.Log($"КОл-во гридов : {gridPlaceList.Count}");
+        for (int i = 0; i < sizeBoard.x; i++)
+        {
+            road = roadFactory.Get();
+            roads.Add(road);
+            road.transform.position = new Vector2(gridPlaceList[sum].transform.position.x - 1, gridPlaceList[sum].transform.position.y);
+            sum += sizeBoard.y;
+            Debug.Log($"Сумма: {sum}");
+        }
+        road = roadFactory.Get();
+
+        road.transform.position = new Vector2(roads[roads.Count-1].transform.position.x, roads[roads.Count - 1].transform.position.y + 1);
+        roads.Add(road);
+        sum = sizeBoard.x * (sizeBoard.y - 1);
+
+        for (int j = 0; j < sizeBoard.y; j++)
+        {
+            road = roadFactory.Get();
+            roads.Add(road);
+            road.transform.position = new Vector2(gridPlaceList[sum].transform.position.x, gridPlaceList[sum].transform.position.y + 1);
+            sum++;
+            Debug.Log($"Сумма: {sum}");
+        }
+        road = roadFactory.Get();
+        road.transform.position = new Vector2(roads[roads.Count - 1].transform.position.x + 1, roads[roads.Count - 1].transform.position.y);
+        roads.Add(road);
+        sum = sizeBoard.x * sizeBoard.y - 1;
+        for (int i = 0; i < sizeBoard.x; i++)
+        {
+            road = roadFactory.Get();
+            roads.Add(road);
+            road.transform.position = new Vector2(gridPlaceList[sum].transform.position.x + 1, gridPlaceList[sum].transform.position.y);
+            sum -= sizeBoard.y;
+            Debug.Log($"Сумма: {sum}");
+        }
+    }
+
+
 }

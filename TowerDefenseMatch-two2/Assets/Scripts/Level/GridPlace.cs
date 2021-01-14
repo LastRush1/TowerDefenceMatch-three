@@ -10,6 +10,10 @@ public class GridPlace : MonoBehaviour
     //public Road road = null;
 
     public int NumberGrid = -1;
+
+    GridFactory originFactory;
+
+
     void Start()
     {
 
@@ -34,6 +38,15 @@ public class GridPlace : MonoBehaviour
        // if (road != null)
         {
             //road.DestroyObject();
+        }
+    }
+    public GridFactory OriginFactory
+    {
+        get => originFactory;
+        set
+        {
+            Debug.Assert(originFactory == null, "Redefined origin factory!");
+            originFactory = value;
         }
     }
 }
