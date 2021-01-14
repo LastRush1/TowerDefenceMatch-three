@@ -994,7 +994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board: {fileID: 1799853763}
-  sizeBoard: {x: 10, y: 10}
+  sizeBoard: {x: 4, y: 4}
   gridTileMap: {fileID: 0}
   canvasTileMap: {fileID: 0}
   gridPlacePrefab: {fileID: 6046587350090188717, guid: 2448ea8e460d4e648b66157856de0d87, type: 3}
