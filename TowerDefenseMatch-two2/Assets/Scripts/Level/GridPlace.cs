@@ -20,11 +20,6 @@ public class GridPlace : MonoBehaviour
     }
 
 
-    void Update()
-    {
-
-    }
-
     public void DestroyBuilding()
     {
         //if (building != null)

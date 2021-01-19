@@ -7,7 +7,9 @@ public class LevelManager : MonoBehaviour
 {
     BoardCreater boardCreater;
     TowerManager towerManager;
-    EnemyController enemySpawner;
+    EnemyController enemyController;
+    TowerController towerController;
+    AttackController attackController;
 
     [SerializeField]
     EnemyFactory enemyFactory;
@@ -24,20 +26,28 @@ public class LevelManager : MonoBehaviour
     {
         boardCreater = GetComponent<BoardCreater>();
         towerManager = GetComponent<TowerManager>();
-        enemySpawner = GetComponent<EnemyController>();
-        
+        enemyController = GetComponent<EnemyController>();
+        towerController = GetComponent<TowerController>();
+        attackController = GetComponent<AttackController>();
     }
     void Start()
     {
         boardCreater.LoadMap(true);
         towerManager.SetTowers(boardCreater.GridPlaceList);
-        enemySpawner.StartSpawn(boardCreater.FirstRoad);
+        enemyController.StartSpawn(boardCreater.FirstRoad);
+        enemyController.RoadSet(boardCreater.Road);
+        towerManager.SetTowerController = towerController;
+
         //enemyFactory.Get();
     }
 
 
     void Update()
     {
+        enemyController.GameUpdate();
+        attackController.EnemyData(enemyController.EnemyPos,enemyController.EnemyGridPos);
+        towerController.GameUpdate();
+        attackController.GameUpdate();
         PlayModeActive();
     }
 

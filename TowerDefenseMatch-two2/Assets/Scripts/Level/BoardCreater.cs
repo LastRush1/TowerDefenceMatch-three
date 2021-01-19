@@ -49,6 +49,12 @@ public class BoardCreater : MonoBehaviour
         get { return roads[0].transform; }
     }
 
+    public List<Road>  Road
+    { 
+        get { return roads; }
+    }
+
+
 
 
 

@@ -18,6 +18,13 @@ public class TowerManager : MonoBehaviour
     [SerializeField]
     TowerFactory towerFactory;
 
+    TowerController towerController;
+
+    public TowerController SetTowerController
+    {
+        set { towerController = value; }
+    }
+
     private void Awake()
     {
         loadTowers = GetComponent<LoadTowers>();
@@ -37,13 +44,9 @@ public class TowerManager : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        
-    }
 
     /// <summary>
-    /// Передает знане о GridPlace листе 
+    /// Передает знание о GridPlace листе 
     /// </summary>
     /// <param name="gridPlace"></param>
     public void SetTowers(List<GridPlace> gridPlace)
@@ -113,19 +116,6 @@ public class TowerManager : MonoBehaviour
         
     }
 
-    /// <summary>
-    /// Создать новую башню
-    /// </summary>
-    /// <param name="num"></param>
-    void TowerInstantiate2(int num)
-    {
-        if (gridPlace[num].building == null)
-        {
-            gridPlace[num].building = Instantiate(prefabs[(int)Randomazer(0, prefabs.Count - 1)], gameObject.transform.position, Quaternion.identity);
-            towers.Add(gridPlace[num].building);
-            gridPlace[num].building.transform.position = gridPlace[num].transform.position;
-        } //
-    }
 
     void TowerInstantiate(int num)
     {
@@ -135,7 +125,7 @@ public class TowerManager : MonoBehaviour
             tower.transform.position = gridPlace[num].gameObject.transform.position;
             gridPlace[num].building = tower;
             towers.Add(gridPlace[num].building);
-            //gridPlace[num].building.transform.position = gridPlace[num].transform.position;
+            towerController.TowerInitialization(tower);
         } 
     }
 
@@ -154,6 +144,7 @@ public class TowerManager : MonoBehaviour
             if (towers[i] == null)
             {
                 towers.RemoveAt(i);
+                towerController.SetActiveTower(i);
                 break;
             }
         }

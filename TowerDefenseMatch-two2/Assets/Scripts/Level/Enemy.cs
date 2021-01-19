@@ -6,6 +6,14 @@ public class Enemy : MonoBehaviour
 {
     EnemyFactory originFactory;
 
+    [SerializeField]
+    GameObject model;
+
+    public GameObject Model
+    {
+        get { return model; }
+    }
+
     public void Initialize()
     {
 

@@ -386,6 +386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -523,6 +524,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &684494062
 Canvas:
   m_ObjectHideFlags: 0
@@ -640,6 +642,7 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &705507995
@@ -976,6 +979,8 @@ GameObject:
   - component: {fileID: 1918052701}
   - component: {fileID: 1918052702}
   - component: {fileID: 1918052703}
+  - component: {fileID: 1918052704}
+  - component: {fileID: 1918052705}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1070,7 +1075,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyFactory: {fileID: 11400000, guid: 62fca1ee5b32f49469441ffd4af79b5b, type: 2}
-  spawnSpeed: 2
+  spawnSpeed: 1
+--- !u!114 &1918052704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918052697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834a4f75c0bb02340b0dcdb997fbbfe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  warFactory: {fileID: 11400000, guid: f5c707390aa8b2b4a9c758bdfdfa4382, type: 2}
+--- !u!114 &1918052705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918052697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db76d4b85dc157942bd9095243bcee4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabShell: {fileID: 1090711311958598903, guid: a01f4e4f021cb124abf3ee1b0b7935f5, type: 3}
 --- !u!1 &2143257207
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,6 +1160,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &2143257210
 Canvas:
   m_ObjectHideFlags: 0

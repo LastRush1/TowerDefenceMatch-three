@@ -142,6 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5
   levelNumText: {fileID: 2385358261175305190}
+  turret: {fileID: 8855749366474355976}
 --- !u!1 &5005553150395324760
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,6 +304,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &1074399688256873529
 MonoBehaviour:
   m_ObjectHideFlags: 0

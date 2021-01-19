@@ -11,6 +11,15 @@ public class Tower : TowerContent
     [SerializeField]
     Text levelNumText = default;
 
+    [SerializeField]
+    Transform turret = default;
+
+    public Transform Turret
+    { 
+        get { return turret; }
+    }
+    
+
     public void Initialize()
     {
 
