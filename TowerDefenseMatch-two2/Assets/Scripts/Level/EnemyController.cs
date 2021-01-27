@@ -19,6 +19,8 @@ public class EnemyController : GameBehavior
 
     List<int> enemyGridPos = new List<int>();
 
+    List<TargetPoint> enemytargetPoints = new List<TargetPoint>();
+
     public List<Transform> EnemyPos
     {
         get { return enemyPos; }
@@ -29,6 +31,11 @@ public class EnemyController : GameBehavior
         get { return enemyGridPos; }
     }
 
+    public List<TargetPoint> EnemytargetPoints
+    {
+        get { return enemytargetPoints; }
+    }
+
     List<Transform>  road = new List<Transform>();
 
     public class EnemyInfo
@@ -36,6 +43,7 @@ public class EnemyController : GameBehavior
         public GameObject enemyObject;
         public Enemy enemyScript;
         public Transform transform;
+        public TargetPoint target;
         public float moveY;
         public float health;
         public int gridPosition;
@@ -46,9 +54,29 @@ public class EnemyController : GameBehavior
 
     public override bool GameUpdate()
     {
+        DeathEnemies();
         MoveEnemies();
         EnemyData();
         return true;
+    }
+
+    private void DeathEnemies()
+    {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            if (enemies[i].health <= 0)
+            {
+                // TO DO : Дать денег игроку
+                RefreshEnemy(enemies[i]);
+            }
+        }
+    }
+
+    void RefreshEnemy(EnemyInfo enemy)
+    {
+        enemy.health = 100f;
+        enemy.gridPosition = 1;
+        enemy.enemyObject.SetActive(false);
     }
 
     /// <summary>
@@ -58,16 +86,20 @@ public class EnemyController : GameBehavior
     {
         List<Transform> enemyPos = new List<Transform>();
         List<int> enemyGridPos = new List<int>();
+        List<TargetPoint> enemytargetPoints = new List<TargetPoint>();
 
         for (int i = 0; i < enemies.Count; i++)
         {
             enemyPos.Add(enemies[i].transform);
 
             enemyGridPos.Add(enemies[i].gridPosition);
+
+            enemytargetPoints.Add(enemies[i].target);
         }
 
         this.enemyPos = enemyPos;
         this.enemyGridPos = enemyGridPos;
+        this.enemytargetPoints = enemytargetPoints;
     }
 
 
@@ -109,22 +141,58 @@ public class EnemyController : GameBehavior
         StartCoroutine(Spawner());
     }
 
+    /// <summary>
+    /// Смотрим не нанесли ли мы урон
+    /// </summary>
+    public void HitsChek()
+    {
+        float damage = 0;
+        //List<WarEntity> hits = new List<WarEntity>();
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            damage = enemies[i].enemyScript.GetDamage();
+            if (damage > 0)
+            {
+                enemies[i].health -= damage;
+            }
+        }
+    }
+
     private void Spawn()
     {
-        Enemy enemy = enemyFactory.Get();
-        enemies.Add(new EnemyInfo
+        bool enemyObject = false;
+        Enemy enemy;
+        for (int i = 0; i < enemies.Count; i++)
         {
-            enemyScript = enemy,
-            enemyObject = enemy.gameObject,
-            transform = enemy.gameObject.transform,
-            gridPosition = 1,
-            moveY = UnityEngine.Random.Range(1f, 2f),
-            health = 100f,
-            move = true,
+            if (!enemies[i].enemyObject.activeSelf)
+            {
+                enemy = enemies[i].enemyScript;
+                enemies[i].enemyObject.SetActive(true);
+                enemy.transform.position = spawn.position;
+                enemyObject = true;
+                break;
+            }
+        }
 
-            finish = false
-        });
-        enemy.transform.position = spawn.position;
+        if (!enemyObject)
+        {
+            enemy = enemyFactory.Get();
+            enemies.Add(new EnemyInfo
+            {
+                enemyScript = enemy,
+                enemyObject = enemy.gameObject,
+                transform = enemy.gameObject.transform,
+                gridPosition = 1,
+                moveY = UnityEngine.Random.Range(1f, 2f),
+                health = 100f,
+                move = true,
+
+                finish = false
+            });
+            enemy.transform.position = spawn.position;
+            enemies[enemies.Count - 1].target = enemies[enemies.Count - 1].enemyScript.SphereCollider.GetComponent<TargetPoint>();
+        }
+        
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     void MoveSystem()
@@ -211,6 +279,7 @@ public class EnemyController : GameBehavior
             else
             {
                 enemies[num].finish = true;
+                enemies[num].gridPosition = 0;
                 trak = new Vector3(0, 0, 0);
             }
         }

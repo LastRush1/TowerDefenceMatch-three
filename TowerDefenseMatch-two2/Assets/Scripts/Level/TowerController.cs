@@ -1,12 +1,7 @@
-using System;
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Jobs;
-using Unity.Mathematics;
-using Unity.Burst;
-using Unity.Entities;
-using Unity.Collections;
+
 
 public class TowerController : GameBehavior
 {
@@ -27,23 +22,44 @@ public class TowerController : GameBehavior
 
     public override bool GameUpdate()
     {
-        Shot();
-        attackController.TowersData(towers);
+        //Shot();
+        attackController.TowersData(towers, removeTowers);
+        ClearRemoveTowers();
         return true;
     }
 
-    private void Shot()
+    public void Shot()
     {
         for (int i = 0; i < towers.Count; i++)
         {
-            towers[i].reload += Time.deltaTime;
-            if (towers[i].reload >= towers[i].attackSpeed)
+            if (towers[i].towerScript.Body.activeSelf)
             {
-                towers[i].reload = 0;
-                towers[i].shot = true;
+                towers[i].reload += Time.deltaTime;
+                if (towers[i].reload >= towers[i].attackSpeed)
+                {
+                    towers[i].reload = 0;
+                    towers[i].shot = true;
+                    TowerTarget(i);
+                }
             }
         }
     }
+
+    void TowerTarget( int towerNum)
+    {
+        TargetPoint targetPoint = attackController.SetMainTarget();
+        //TO DO: Добавить правила для проверки, чтобы переключать цели!!!
+        if (targetPoint != null)
+        {
+            towers[towerNum].target = targetPoint;
+        }
+        else
+        {
+            //towers[towerNum].target = target;
+        }
+
+    }
+
 
     public class TowerInfo
     {
@@ -51,11 +67,27 @@ public class TowerController : GameBehavior
         public GameObject towerObject;
         public Transform transform;
         public Transform Gun;
-        public Transform target;
         public Transform turret;
+        public TargetPoint target = null;
+        public List<WarEntity> shells = new List<WarEntity>();
         public float attackSpeed;
-        public bool shot;
+        public float damage;
+        public bool shot = false;
+
         public float reload = 0;
+    }
+
+
+
+
+
+    public void Info()
+    {
+        Debug.Log($"Кол-во башен {towers.Count}");
+        for (int i = 0; i < towers.Count; i++)
+        {
+            Debug.Log($"Turret{i} {towers[i].turret.position}");
+        }
     }
 
     public void TowerInitialization(Tower tower)
@@ -66,13 +98,29 @@ public class TowerController : GameBehavior
             towerObject = tower.gameObject,
             transform = tower.transform,
             turret = tower.Turret,
+            shot = false,
+            damage = 20f,
             attackSpeed = 1f
         });
     }
 
+    List<int> removeTowers = new List<int>();
+
+    public List<int> RemoveTowers
+    {
+        get { return removeTowers; }
+    }
+
+    void ClearRemoveTowers()
+    {
+        removeTowers.Clear();
+    }
     public void SetActiveTower(int i)
     {
-        towers.RemoveAt(i);
+        towers[i].towerScript.Body.SetActive(false);
+
+        removeTowers.Add(i);
+
     }
 
 }

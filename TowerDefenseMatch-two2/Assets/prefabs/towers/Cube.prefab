@@ -29,7 +29,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_Children: []
+  m_Children:
+  - {fileID: 4985998898061381944}
   m_Father: {fileID: 2267324028672630971}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -203,7 +204,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3930322229161228873}
-  - {fileID: 4985998898061381944}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -222,6 +222,7 @@ MonoBehaviour:
   id: 2
   levelNumText: {fileID: 6299653962424431444}
   turret: {fileID: 3930322229161228873}
+  body: {fileID: 3247892245101270875}
 --- !u!1 &8937746287734937804
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,15 +251,15 @@ RectTransform:
   m_GameObject: {fileID: 8937746287734937804}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
   - {fileID: 8099900792281944446}
-  m_Father: {fileID: 2267324028672630971}
-  m_RootOrder: 1
+  m_Father: {fileID: 3930322229161228873}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.0026, y: 0.0011}
+  m_AnchoredPosition: {x: 0.0052, y: 0.0022}
   m_SizeDelta: {x: 140.29321, y: 140.84232}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &560814233503929887
@@ -304,7 +305,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &5373504486936030847
 MonoBehaviour:
   m_ObjectHideFlags: 0

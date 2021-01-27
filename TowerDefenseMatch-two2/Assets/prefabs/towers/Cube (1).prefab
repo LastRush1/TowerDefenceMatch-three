@@ -147,6 +147,7 @@ MonoBehaviour:
   id: 0
   levelNumText: {fileID: 323822879058728042}
   turret: {fileID: 743694940762393513}
+  body: {fileID: 8847324448576690524}
 --- !u!1 &7781450088010860340
 GameObject:
   m_ObjectHideFlags: 0

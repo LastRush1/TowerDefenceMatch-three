@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
     EnemyController enemyController;
     TowerController towerController;
     AttackController attackController;
+    FindTarget findTarget;
 
     [SerializeField]
     EnemyFactory enemyFactory;
@@ -29,6 +30,7 @@ public class LevelManager : MonoBehaviour
         enemyController = GetComponent<EnemyController>();
         towerController = GetComponent<TowerController>();
         attackController = GetComponent<AttackController>();
+        findTarget = GetComponent<FindTarget>();
     }
     void Start()
     {
@@ -45,11 +47,18 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         enemyController.GameUpdate();
-        attackController.EnemyData(enemyController.EnemyPos,enemyController.EnemyGridPos);
+        attackController.EnemyData(enemyController.EnemyPos, enemyController.EnemyGridPos, enemyController.EnemytargetPoints);
+        findTarget.GameUpdate();
+        Physics.SyncTransforms();
+
+        towerManager.UnionUpdate();
         towerController.GameUpdate();
+
         attackController.GameUpdate();
+        enemyController.HitsChek();
         PlayModeActive();
     }
+
 
     /// <summary>
     /// Апдейт в PlayerMod'е
@@ -80,6 +89,7 @@ public class LevelManager : MonoBehaviour
                 int grid = GridNumber;
                 GridNumber = gridPlace.NumberGrid;
                 towerManager.PotentialUnion(grid,GridNumber);
+                tower = null;
             }
         }
         //BuyAndBuildTower(GridNumber);

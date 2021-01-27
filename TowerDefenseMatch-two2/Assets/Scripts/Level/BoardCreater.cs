@@ -195,14 +195,14 @@ public class BoardCreater : MonoBehaviour
     {
         int sum = 0;
         Road road;
-        Debug.Log($"КОл-во гридов : {gridPlaceList.Count}");
+        //Debug.Log($"КОл-во гридов : {gridPlaceList.Count}");
         for (int i = 0; i < sizeBoard.x; i++)
         {
             road = roadFactory.Get();
             roads.Add(road);
             road.transform.position = new Vector2(gridPlaceList[sum].transform.position.x - 1, gridPlaceList[sum].transform.position.y);
             sum += sizeBoard.y;
-            Debug.Log($"Сумма: {sum}");
+           // Debug.Log($"Сумма: {sum}");
         }
         road = roadFactory.Get();
 
@@ -216,7 +216,7 @@ public class BoardCreater : MonoBehaviour
             roads.Add(road);
             road.transform.position = new Vector2(gridPlaceList[sum].transform.position.x, gridPlaceList[sum].transform.position.y + 1);
             sum++;
-            Debug.Log($"Сумма: {sum}");
+           // Debug.Log($"Сумма: {sum}");
         }
         road = roadFactory.Get();
         road.transform.position = new Vector2(roads[roads.Count - 1].transform.position.x + 1, roads[roads.Count - 1].transform.position.y);
@@ -228,7 +228,7 @@ public class BoardCreater : MonoBehaviour
             roads.Add(road);
             road.transform.position = new Vector2(gridPlaceList[sum].transform.position.x + 1, gridPlaceList[sum].transform.position.y);
             sum -= sizeBoard.y;
-            Debug.Log($"Сумма: {sum}");
+           // Debug.Log($"Сумма: {sum}");
         }
     }
 

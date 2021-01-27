@@ -18,7 +18,15 @@ public class Tower : TowerContent
     { 
         get { return turret; }
     }
-    
+
+    [SerializeField]
+    GameObject body = default;
+
+    public GameObject Body
+    {
+        get { return body; }
+    }
+
 
     public void Initialize()
     {

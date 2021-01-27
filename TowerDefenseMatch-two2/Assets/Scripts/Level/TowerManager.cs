@@ -20,6 +20,7 @@ public class TowerManager : MonoBehaviour
 
     TowerController towerController;
 
+
     public TowerController SetTowerController
     {
         set { towerController = value; }
@@ -52,7 +53,7 @@ public class TowerManager : MonoBehaviour
     public void SetTowers(List<GridPlace> gridPlace)
     {
         this.gridPlace = gridPlace;
-        int gridSum = gridPlace.Count;
+        //int gridSum = gridPlace.Count;
     }
 
     /// <summary>
@@ -124,32 +125,72 @@ public class TowerManager : MonoBehaviour
             Tower tower = towerFactory.Get(prefabs[(int)Randomazer(0, prefabs.Count - 1)]);
             tower.transform.position = gridPlace[num].gameObject.transform.position;
             gridPlace[num].building = tower;
-            towers.Add(gridPlace[num].building);
             towerController.TowerInitialization(tower);
+            towers.Add(gridPlace[num].building);
         } 
     }
 
-
-
+    bool union = false;
+    
     /// <summary>
-    /// Удалить башню(переписать и сдеать более экономично, т.е. отключать и снова использовать)
+    /// Объеденяет башни в начале кадра
     /// </summary>
-    /// <param name="tower"></param>
-    void TowerDestroy(GridPlace tower)
+    public void UnionUpdate()
     {
-        Destroy(tower.building.gameObject);
-        tower.building = null;
-        for (int i = 0; i < towers.Count; i++)
+        if (union)
         {
-            if (towers[i] == null)
+            union = false;
+            int a = 0, b = 0;
+            for (int i = 0; i < towers.Count; i++)
             {
-                towers.RemoveAt(i);
-                towerController.SetActiveTower(i);
-                break;
+                if (gridPlace[unionData[1]].building == towers[i])
+                {
+                    a = i;
+                    break;
+                }
+
             }
+
+            TowerDestroy(gridPlace[unionData[1]], a);
+
+            for (int i = 0; i < towers.Count; i++)
+            {
+                if (gridPlace[unionData[2]].building == towers[i])
+                {
+                    b = i;
+                    break;
+                }
+            }
+
+            TowerDestroy(gridPlace[unionData[2]], b);
+
+            TowerInstantiate(gridPlace[unionData[2]].NumberGrid);
+
+
+            for (int i = 0; i < unionData[0]; i++)
+            {
+                towers[towers.Count - 1].LevelUp();
+            }
+            Debug.Log("Типо слияние");
+            unionData.Clear();
         }
     }
 
+
+    /// <summary>
+    /// Отключить башню(переписать отключать и снова использовать)
+    /// </summary>
+    /// <param name="tower"></param>
+    void TowerDestroy(GridPlace tower, int towerNum)
+    {
+        //Destroy(tower.building.gameObject);
+        tower.building = null;
+        towers[towerNum].transform.position = new Vector2(-10,-10);
+        //towers.RemoveAt(towerNum);
+        towerController.SetActiveTower(towerNum);
+    }
+
+    List<int> unionData = new List<int>();
     /// <summary>
     /// Слияние башен
     /// </summary>
@@ -159,16 +200,10 @@ public class TowerManager : MonoBehaviour
     /// <param name="secondTowerNum"></param>
     private void Union(int levelTower2, int firstTowerNum, int secondTowerNum) // При слиянии нужно удалять из активных башен!!! а так же добавлять в активные башни новые
     {
-        TowerDestroy(gridPlace[firstTowerNum]);
-        TowerDestroy(gridPlace[secondTowerNum]);
-        TowerInstantiate(gridPlace[secondTowerNum].NumberGrid);
-
-
-        for (int i = 0; i < levelTower2; i++)
-        {
-            towers[towers.Count-1].LevelUp();
-        }
-        Debug.Log("Типо слияние");
+        union = true;
+        unionData.Add(levelTower2);
+        unionData.Add(firstTowerNum);
+        unionData.Add(secondTowerNum);
     }
 
     /// <summary>
